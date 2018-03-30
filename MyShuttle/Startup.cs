@@ -34,9 +34,11 @@ namespace MyShuttle
         {
             services.ConfigureDataContext(Configuration);
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<MyShuttleContext>()
-                .AddDefaultTokenProviders();
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<MyShuttleContext>()
+            //    .AddDefaultTokenProviders();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(p => { p.Password.RequireDigit = false; p.Password.RequireLowercase = false; p.Password.RequireUppercase = false; p.Password.RequireNonAlphanumeric = false; }).AddEntityFrameworkStores<MyShuttleContext>().AddDefaultTokenProviders();
 
             services.ConfigureDependencies();
             services.AddMvc();
@@ -45,8 +47,12 @@ namespace MyShuttle
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.ConfigureRoutes();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.ConfigureRoutes();
+            
 
         }
     }
