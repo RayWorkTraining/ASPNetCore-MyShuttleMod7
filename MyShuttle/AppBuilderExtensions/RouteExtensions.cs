@@ -9,6 +9,15 @@
         {
             return app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "DriverCountWithFilter", 
+                //    template: "api/drivers/{filter}", 
+                //    defaults: new { controller = "Drivers", action = "count" });
+
+                //routes.MapRoute(
+                //    name: "defaultWithPrefix", 
+                //    template: "api/{controller}/{action}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action}/{id?}",
